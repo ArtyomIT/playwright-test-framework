@@ -6,6 +6,13 @@ from pages.checkout_page import CheckoutPage
 from pages.overview_page import OverviewPage
 from pages.checkout_complete_page import CheckoutCompletePage
 
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args, pytestconfig):
+    return {
+        **browser_context_args,
+        "base_url": pytestconfig.getini("base_url"),
+    }
+
 @pytest.fixture
 def login_page(page):
     return LoginPage(page)
